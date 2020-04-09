@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<!-- 头区  网页摘要, 引入或定义 js 代码    css 样式代码-->
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<!-- 内容区 -->
+<body>
+<!-- 注释: pre 标签可以保留 空格和换行 -->
+<pre>
+	1. 文字, Hello World, 文字中的空格会被缩减
+	2. 标签:  
+		语法:  开始标签 和 截止标签 , 标签属性   
+		<font color="red">字体标签</font>
+		分类: 
+			块级标签: 每一个标签(元素)占用一整行
+				h, p,  hr  , ul(无序),  ol(有序),  table,  div  
+			行级标签: 每一个标签(元素)在一个行占据一个元素位置
+				1. 普通行级标签
+					img 图片, a 超链接, br 换行, span 文本块 
+				2. 表单标签( 用户交互控件  )
+					按钮, 输入框, 多选框, 单选框, 下列框
+
+</pre>
+
+<h1 id="title">大标题</h1>
+<p>
+	一大段文字vue click同时传入事件对象和自定义参数
+	转载马优晨 最后发布于2019-06-25 16:25:33 阅读数 13713  收藏
+<hr>
+	展开
+	仅仅传入自定义参数
+	HTML
+</p>
+
+<h6>小标题</h6>
+
+<ul>
+	<li>电影1</li>
+	<li>电影2</li>
+	<li>电影3</li>
+	<li>电影4</li>
+</ul>
+
+<ol type="A">
+	<li>图书1</li>
+	<li>图书2</li>
+	<li>图书3</li>
+	<li>图书4</li>
+</ol>
+
+<table width="800px" border="1" cellspacing="0" cellpadding="0">
+	<!-- tr 表示行 table-row   
+		th table-head 表头标签 默认是文字居中, 字体加粗  
+		td 列标签  默认文字居左-->
+	<tr style="background: green">
+		<th>区域</th>
+		<th>岗位</th>
+		<th>姓名</th>
+		<th>工资</th>
+	</tr>
+	
+	<tr>
+		<!-- rowspan 表示跨行 -->
+		<td rowspan="3">华东</td>
+		<td rowspan="2">人事</td>
+		<td>张民</td>
+		<td>1500</td>
+	</tr>
+	<tr>
+		<td>宋江</td>
+		<td>2500</td>
+	</tr>
+	<tr>
+		<td rowspan="3">软件开发工程师</td>
+		<td>武松</td>
+		<td>2200</td>
+	</tr>
+	<tr>
+		<td rowspan="2">华中区</td>
+		<td>李逵</td>
+		<td>2200</td>
+	</tr>
+	<tr>
+		<td>林冲</td>
+		<td>2200</td>
+	</tr>
+	<tr>
+		<td colspan="3">合计</td>
+		<td>12310</td>
+	</tr>
+
+</table>
+
+<img alt="表示当图片不存在时,显示的文字" src="b.jpg">
+<!-- WebContent/a.jpg    WebContent/page/hello.jpg 
+	.. / 表示上级目录
+-->
+<img alt="表示当图片不存在时,显示的文字" src="../a.jpg">
+<!-- WebContent/images/c.jpg    WebContent/page/hello.jpg 
+	.. / 表示上级目录
+-->
+<img alt="表示当图片不存在时,显示的文字" src="../images/c.jpg">
+
+<br>
+
+<!-- href 地址
+	地址的写法:
+	1. http:// or https:// 跳转到其他网站页面
+	2. index.html, 跳转到本站的网页, 支持带路径( ../ )
+	3. 用 #标签的名字或id(标识,每个元素的唯一的标识) 进行导航
+		#标识 ==> 锚点
+
+ -->
+<a href="https://market.m.taobao.com/app/tb-source-app/aiguangjiepc/content/index.html?spm=a21bo.2017.201870.2.5af911d9qk5Rtn&contentId=2500000200570373177&scm=1007.12846.156652.0&pvid=dc48320e-a1bc-4662-9cac-d56b40149a47">
+跳转到其他网站页面
+</a>
+
+<a href="../index.html">
+跳转到本网站页面
+</a>
+
+<a href="#title">
+用 #标签的名字 进行导航
+</a>
+
+
+
+
+<div style="height:300px">顶起!!!!!!!!!!</div>
+
+
+</body>
+
+</html>
