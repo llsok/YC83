@@ -126,9 +126,39 @@
 用 #标签的名字 进行导航
 </a>
 
+<!-- 表单元素 , 如果要提交数据 那么所有的表单标签,必须位于 form 标签内部
+	form 的action 与 超链接 的 href 都是标识跳转的地址
+
+-->
+<br><br><br>
+<form action="../index.html">
+
+用户名:<input type="不写  或 text 或 写错 都是文本框"><br>
+密码:<input type="password"><br>
+邮箱:<input type="email"><br>
+爱好:<input type="checkbox">电影
+	<input type="checkbox">篮球
+	<input type="checkbox">读书<br>
+学历:<input type="radio" name="edu">初中
+	<input type="radio" name="edu">高中
+	<input type="radio" name="edu">小学<br>
+状态:<select><!--  下拉框 -->
+		<option>在读</option>
+		<option>毕业</option>
+	</select><br>
+备注:<textarea rows="5" cols="20">多行文本框</textarea><br>
+<!-- 提交按钮 -->
+<input type="submit" value="注册">
+
+
+</form>
 
 
 
+
+
+
+<br><br><br>
 <div style="height:300px">顶起!!!!!!!!!!</div>
 
 
