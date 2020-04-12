@@ -1,0 +1,36 @@
+HTML: 超文本标记语言
+<html>
+	<head> 头区: 设置信息( 搜索关键字 ) ,  引用 资源文件 </head>
+	<body  a='1' b="2" > 
+	内容区 
+		1. 文字信息
+		2.标签
+			块级标签: 每个标签占一行
+				h[1-6] p ul ol li dl table div
+			行级标签: 每个标签在一行占据一个区域
+				a href 
+					1. http[s]://  外站地址
+					2. 本站的资源路径      目录/文件名,  ..表示上级目录
+					3. # 锚点导航
+				img 图片  src width height
+				表单: 按钮 文本框 单选
+					<form>
+						<input type="类型">
+						<select>
+						<textarea>
+					</form>
+		3. 转义符号
+			<  ==>  &lt;   &xxx;
+			空格 ==>       &nbsp;
+			&  ==>  &amp;
+	
+	</body>
+</html>
+
+
+HTML 元素: 展示效果的属性: 高宽, 颜色, 边框
+
+CSS  <标签  style="名:值 ;  名1:值1 ;  名2:值2 ;  名3:值3 ;   ">
+
+
+

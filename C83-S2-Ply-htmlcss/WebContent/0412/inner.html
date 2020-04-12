@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>内部样式</title>
+
+<style type="text/css">
+/* 1. 如果设置到指定的元素上 :  使用选择器的东东
+		1) 	标签选择器
+		2)	id选择器 , 格式: #开头 + id
+		3) 	类选择器, 格式 : .开头+ 类名
+		4)	子选择器,   格式:  父>子
+				父子 和 关系
+				祖先 和 后代
+		5) 	后代选择器, 格式:  父 子  ,> 换成空格
+		6)	属性选择器, 格式: 其他选择器后  [ id]
+		
+		https://www.w3school.com.cn/cssref/css_selectors.asp
+		
+   2. 设置的格式*/
+h4 {
+	color: blue;
+	font-family: 宋体;
+	text-shadow: 3px 3px #999; /* 文字阴影 */
+}
+
+#p1 {
+	color: red
+}
+
+.myp {
+	color: green
+}
+
+#d1>p{
+	background-color: #eee
+}
+
+#d2 p{
+	background-color: #ddd
+}
+
+p[id^=p]{	
+	background-color: #666
+}
+</style>
+
+</head>
+<body>
+	<h2>内部样式</h2>
+	<h4>CSS基本属性</h4>
+	<div id="d1">
+		<p id="p1">如果设置到指定的元素上 : 使用选择器的东东</p>
+		<p class="myp">如果设置到指定的元素上 : 使用选择器的东东</p>
+		<p class="myp">如果设置到指定的元素上 : 使用选择器的东东</p>
+		<p>如果设置到指定的元素上 : 使用选择器的东东</p>
+		<div>
+			<p>这是后代(孙子,曾孙)</p>
+			<p>这是后代(孙子,曾孙)</p>
+			<p>这是后代(孙子,曾孙)</p>
+		</div>
+	</div>
+	<h4>CSS文本属性</h4>
+	<div id="d2">
+		<p id="p2">如果设置到指定的元素上 : 使用选择器的东东</p>
+		<p class="myp">如果设置到指定的元素上 : 使用选择器的东东</p>
+		<p>如果设置到指定的元素上 : 使用选择器的东东</p>
+		<p class="myp">如果设置到指定的元素上 : 使用选择器的东东</p>
+		<div>
+			<p id="p3">这是后代(孙子,曾孙)</p>
+			<p>这是后代(孙子,曾孙)</p>
+			<p>这是后代(孙子,曾孙)</p>
+		</div>
+	</div>
+</body>
+</html>

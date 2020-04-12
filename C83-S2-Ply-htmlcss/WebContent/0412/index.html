@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- alt + / 代码提示 -->
+<!-- 
+	color 文字颜色设定: 
+		1. 颜色单词
+		2. 使用 #样式代码:  6位16进制数字  0~f  ==> 红绿蓝  255,255,255  ff ff ff白  0 0 0黑
+			简写模式 :   #ffee99 ==> #fe9
+		3. rgb 函数
+		4. rgba(r,g,b,a) a 表示透明度
+		
+	background 背景设定
+	background-color 背景颜色
+	background-image 背景图片  默认平铺(x,y)
+	background-repeat 重复
+	background-size 大小
+	background-position 位置
+	
+	height: 高度
+	width: 宽度
+	
+	长度: 
+		px 像素
+		em 相对大小
+		in 英寸
+		cm 厘米
+		mm 毫米
+		...
+	
+	变宽: border
+	
+	简写模式:  背景, 边框( 边距) 
+ -->
+<h3 style="
+	color: red;
+	height:200px; 
+	width: 500px;
+	/* background-image: url(../a.jpg);
+	background-repeat: repeat-y;
+	background-size: 50px; */
+	background: url(../a.jpg) no-repeat 20px 30px;
+	border-color: #f00; 
+	border-style: solid;
+	border-width: 2px
+	"
+>CSS样式</h3>
+
+<h3 style="color: #ff0000;">CSS样式</h3>
+<h3 style="color: #00ff00;">CSS样式</h3>
+<h3 style="color: #ffee99;">CSS样式</h3>
+<h3 style="color: #Fe9;">CSS样式</h3>
+
+<h3 style="color: rgb(0,0,255);">CSS样式</h3>
+<h3 style="color: rgba(0,0,255,0);">CSS样式</h3>
+<h3 style="color: rgba(0,0,255,1);">CSS样式</h3>
+<h3 style="color: rgba(0,0,255,0.5);">CSS样式</h3>
+</body>
+</html>
