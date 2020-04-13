@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>元素定位</title>
+<!-- 文档流:  html 元素正常排布的方式  -->
+<style type="text/css">
+#d1{
+	width: 500px;
+	height:500px;
+	background: #eee;
+}
+
+#d2{
+	width: 100px;
+	height:100px;
+	background: #f00;
+}
+
+#d3{
+	width: 200px;
+	height:80px;
+	background: #0f0;
+	/*
+		position 配合  left right  top  bottom
+		static 默认效果
+		relative 相对定位, 相对于元素的static的位置, 改变坐标
+		absolute 绝对定位, 一般情况下相对于它父容器的定位
+		fixed    固定定位, 相对于它浏览器的定位
+	*/
+	position:fixed;
+	left: 200px;
+	top : 100px;
+	
+}
+
+#d4{
+	width: 400px;
+	height:150px;
+	background: #00f;
+}
+</style>
+</head>
+<body>
+	<!-- float  浮动        
+		将块级元素呈现出水平排布的效果 ==> 文字环绕
+	 position  定位-->
+	<div id="d1">
+		<div id="d2"></div>
+		<div id="d3"></div>
+		<div id="d4"></div>
+	</div>
+
+</body>
+</html>

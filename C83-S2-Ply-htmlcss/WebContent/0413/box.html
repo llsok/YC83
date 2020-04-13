@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>盒子模型</title>
+<!-- 盒子模型只能应用于 块级元素  -->
+<style type="text/css">
+#d1{
+	width: 500px;
+	height: 300px;
+	background: green;
+	/*padding 内边距*/
+	padding:10px;
+}
+
+.cd1{
+	width: 50px;
+	height: 50px;
+	background: #f00;
+	/*margin 外边距*/
+	/* margin: 20px; */
+	/*padding 内边距*/
+	padding:15px;
+	border: 5px yellow solid;
+	/* 边距 简写模式
+		上  右  下  左
+	    margin: 10px  20px  30px  40px;
+		上下   左右
+	    margin: 10px  20px;
+		上   左右 下
+	    margin: 10px  20px  30px;
+	    auto 表示自动分配空间 实现居中  auto 指定应用在 margin 中
+	    margin: 10px  auto
+	*/
+	margin: 20px  auto;
+	
+	
+}
+</style>
+</head>
+<body>
+
+
+<div id="d1">
+	<div class="cd1">测试</div>
+</div>
+
+</body>
+</html>

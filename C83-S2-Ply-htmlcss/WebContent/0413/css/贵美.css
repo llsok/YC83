@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+body{
+	background: #ccc;
+}
+
+div{
+	width:500px;
+	height: 100px;
+	/*背景*/
+	background: #ff7300;
+	border: 5px #666 solid;
+	margin: 20px auto;
+	padding: 10px;
+	/*文字居中*/
+	text-align: center;
+	/*行高*/
+	line-height: 100px;
+	
+}
+
+img{
+	/*垂直居中*/
+	vertical-align: middle;
+}
