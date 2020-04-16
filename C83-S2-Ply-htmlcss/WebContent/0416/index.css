@@ -30,6 +30,8 @@ header{
 	background-repeat: no-repeat;
 	/* center 居中 位置描述词 */
 	background-position: 20px center;
+	/*内部的 ul 元素要使用绝对定位, 那么父元素必须相应的设置 position */
+	position: relative;
 }
 
 header>p{
@@ -40,9 +42,18 @@ header>p{
 	color: #fff
 }
 
+/*设置绝对定位, 让ul 停靠 header 右下角*/
+header>ul{
+	position:absolute;
+	right:16px;
+	bottom:16px;
+}
+
 header li{
-	float: right;
-	padding: 12px 20px 0px 0px;
+	/* float: right;
+	padding: 12px 20px 0px 0px; */
+	float:left;
+	padding:0px 10px;
 }
 
 header li>a{
