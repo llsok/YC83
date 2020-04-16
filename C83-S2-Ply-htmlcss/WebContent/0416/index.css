@@ -19,6 +19,14 @@ li{
 /*去除超链接默认的下划线*/
 a{
 	text-decoration:none;
+	/* 默认超链接为白色字体*/
+	color: #fff;
+}
+/*伪类选择器   hover 鼠标悬停伪类*/
+a:hover{
+	color:#f00;
+	/*产生下划线*/
+	text-decoration: underline;
 }
 
 /*页头板块设置  开始*/
@@ -56,15 +64,16 @@ header li{
 	padding:0px 10px;
 }
 
-header li>a{
+/* header li>a{
 	color: #fff
-}
+} */
+
 /*伪类选择器   hover 鼠标悬停伪类*/
-header li>a:hover{
+/* header li>a:hover{
 	color:#f00;
-	/*产生下划线*/
+	产生下划线
 	text-decoration: underline;
-}
+} */
 /*页头板块设置  结束*/
 
 
@@ -88,3 +97,35 @@ footer>p>a{
 }
 
 /*页脚板块设置  结束*/
+
+/*菜单板块设置  开始*/
+menu{
+	width: 100%;
+	height: 40px;
+	background-image: url(images/menu_bg.png);
+}
+menu>li{
+	float: left;
+	width: 100px;
+	height: 100%;
+	/*行高 = 空间高度, 文字会自动上下居中,   行高不能用 百分值  */
+	line-height: 40px;
+	text-align: center;
+	background: url(images/menu.jpg) no-repeat right center;
+}
+/* 最后一个li不要 背景图  */
+menu>li:last-child{
+	background: none;
+}
+
+/*菜单板块设置  结束*/
+
+
+
+
+
+
+
+
+
+
