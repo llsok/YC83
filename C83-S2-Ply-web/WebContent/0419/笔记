@@ -1,0 +1,33 @@
+JSP + Servlet
+
+JSP: Java Server Pages
+
+JSP = Java + Html   ==>  JSP 本质上是一个 Servlet 类
+
+HTML 页面的内容( 不是指效果 )永远不变
+
+动态网页技术: ASP, PHP, JSP
+
+Vue thmeleaf ...
+
+
+JSP 语法元素:
+1.JSP 表达式  	=> <%= 表达式 一行 %>
+2.JSP 脚本	=> <% 大段java代码 N行 %>
+3.JSP 内置对象	=> out, request, response
+
+4.JSP 动作标签
+5.JSP 指令
+6.JSP 声明
+...
+
+
+Tomcat 运行过程: 接收浏览器的请求, 给与对应的响应的服务器程序
+
+
+Servlet: 服务端的服务组件,   用于处理动态请求,动态生成网页
+	Servlet组件对象被创建出来之后, 会被保存在Servlet 容器中( Map, Set)
+
+
+
+
