@@ -66,6 +66,7 @@ public class SayHelloServlet extends HttpServlet {
 		// 设置请求的字符集
 		request.setCharacterEncoding("utf-8");
 		
+		// 获取请求参数
 		String name = request.getParameter("name");
 		String age = request.getParameter("age");
 		PrintWriter out = response.getWriter();
