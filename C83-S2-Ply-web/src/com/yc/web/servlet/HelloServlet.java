@@ -33,9 +33,20 @@ public class HelloServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, 
 			HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("=====HelloServlet====doGet==========");
 		// 该方法内部可以用于输出页面元素
 		PrintWriter out = resp.getWriter();
 		out.print("Hello World!");
+	}
+
+	@Override
+	public void destroy() {
+		System.out.println("=====HelloServlet====destroy==========");
+	}
+
+	@Override
+	public void init() throws ServletException {
+		System.out.println("=====HelloServlet====init==========");
 	}
 	
 	
