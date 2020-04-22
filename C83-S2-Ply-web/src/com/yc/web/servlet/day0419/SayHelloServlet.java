@@ -1,4 +1,4 @@
-package com.yc.web.servlet;
+package com.yc.web.servlet.day0419;
 
 import java.io.IOException;
 import java.io.PrintWriter;
