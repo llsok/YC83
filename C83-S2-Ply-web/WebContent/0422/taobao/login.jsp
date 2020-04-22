@@ -7,9 +7,14 @@
 <title>登录页面</title>
 </head>
 <body>
-<form action="登录的servlet" method="post">
-	用户: <input name="num1" ><br>
-	密码: <input name="num2" type="password"><br>
+<%
+	// 获取请求对象的属性值
+	String msg = (String)request.getAttribute("msg");
+%>
+<form action="login.s" method="post">
+	<font color="red"><%= msg == null ? "" : msg %></font><br>
+	用户: <input name="name" ><br>
+	密码: <input name="pwd" type="password"><br>
 	<input type="submit" value="登录">
 </form>
 </body>

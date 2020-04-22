@@ -24,10 +24,12 @@ public class PayServlet extends HttpServlet {
 		// 获取web服务器自动创建的会话对象
 		HttpSession session = request.getSession();
 		// 从会话中获取登录的标识
+		// loginedUser 是保存在会话中的登录标志
 		Object loginedUser = session.getAttribute("loginedUser");
 		
 		if(loginedUser == null) {
 			// 表示没有登录
+			request.setAttribute("msg", "请先登录系统!");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		} else {
 			// 表示已经登录
