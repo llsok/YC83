@@ -3,6 +3,7 @@ package com.yc.web.servlet.day0422.taobao;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,14 @@ public class LoginServlet extends HttpServlet {
 			// 成功
 			HttpSession session = request.getSession();
 			session.setAttribute("loginedUser", name);
+			
+			/**
+			 * 将用户名保存到客户端的cookie中
+			 */
+			Cookie cookie = new Cookie("username",name);
+			cookie.setMaxAge(60 * 60 * 24 * 7);
+			response.addCookie(cookie);
+			
 			request.getRequestDispatcher("order.jsp")
 				.forward(request, response);
 		} else {

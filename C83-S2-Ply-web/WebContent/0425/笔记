@@ -1,0 +1,22 @@
+Cookie
+	在浏览器端保存用户少量数据的技术
+	4K字节, 50个数据项, 默认只能保存非西方文字
+	添加Cookie的方式
+		1.document.cookie = "a=b;expires=日期"
+		2.服务器使用 response 对象, addCookie(cookie)
+			Cookie cookie = new Cookie("名","值");
+			cookie.setMaxAge(秒值)
+			cookie.setPath("路径")
+	cookie数据保存的位置:
+	1. 如果未设置有效日期, 那么保存在浏览器的内存中
+	2. 如果设置了有效日期, 那么保存在客户端的硬盘上
+			
+
+Session
+	在服务器器端保存用户数据的技术
+	服务器会为每一个浏览器创建一个会话对象, 并且在接收到请求时, 
+		将该会话对象设置到请求对象中.
+	HttpSession session = request.getSession();
+	session.setAttribute("属性名", 属性值);
+	Object 属性值 = session.getAttribute("属性名");
+	Session.invalidate() 会话的手动失效

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="ajax.js"></script>
+<style type="text/css">
+#nameMsg{
+	color:red
+}
+select {
+	width:120px
+}
+</style>
+<script type="text/javascript">
+
+	function callback(msg){
+		alert(msg);
+	}
+	
+	function hello(){
+		get("/C83-S2-Ply-web/hello.s", callback);
+	}
+	
+	function checkName(name){
+		get("/C83-S2-Ply-web/checkName.s?name="+name, function(msg){
+			nameMsg.innerText = msg;
+		});
+	}
+	
+	function addLikeItem(){
+		get("/C83-S2-Ply-web/addLikeItem.s?", function(data){
+			// 字符串转js 对象
+			var arr = eval( data );
+			var html = "";
+			for(var i=0; i< arr.length; i++){
+				html += "<option>" + arr[i] + "</option>"
+			}
+			like.innerHTML = html;	
+		});
+	}
+	
+</script>
+</head>
+<body>
+	<form action="">
+		用户名:<input id="name" onblur="checkName(this.value)"><span id="nameMsg"></span><br>
+		密码:<input id="pwd"><br>
+		爱好:<select id="like"></select><br>
+		<button onclick="hello()" type="button">hello</button>
+		<button onclick="addLikeItem()" type="button">添加爱好选项</button>
+	</form>
+</body>
+</html>
