@@ -43,54 +43,62 @@ public class DBHelper {
 	 */
 	public int update(String sql, Object...args) throws SQLException {
 		Connection conn = getConnection();
-		// 3.创建语句
-		PreparedStatement ps = conn.prepareStatement(sql);
-		// 4.执行语句
-		// for + alt + /
-		// 设置参数
-		for (int i = 0; i < args.length; i++) {
-			ps.setObject(i+1, args[i]);
+		try {
+			// 3.创建语句
+			PreparedStatement ps = conn.prepareStatement(sql);
+			// 4.执行语句
+			// for + alt + /
+			// 设置参数
+			for (int i = 0; i < args.length; i++) {
+				ps.setObject(i+1, args[i]);
+			}
+			System.out.println("SQL: " + sql);
+			System.out.println("参数: " + Arrays.toString(args));
+			int rows = ps.executeUpdate();
+			return rows;
+		} finally {
+			// 5.关闭连接
+			conn.close();
+			// 连接一定会被关闭
 		}
-		System.out.println("SQL: " + sql);
-		System.out.println("参数: " + Arrays.toString(args));
-		int rows = ps.executeUpdate();
-		// 5.关闭连接
-		conn.close();
-		return rows;
 	}
 	
 	public List<Map<String,Object>> query(String sql, Object...args) throws SQLException {
 		Connection conn = getConnection();
-		// 3.创建语句
-		PreparedStatement ps = conn.prepareStatement(sql);
-		// 4.执行语句
-		// for + alt + /
-		// 设置参数
-		for (int i = 0; i < args.length; i++) {
-			ps.setObject(i+1, args[i]);
-		}
-		System.out.println("SQL: " + sql);
-		System.out.println("参数: " + Arrays.toString(args));
-		ResultSet rs = ps.executeQuery();
-		List<Map<String,Object>> ret = new ArrayList<>();
-		ResultSetMetaData rsmd = rs.getMetaData(); // 结果集   元数据(  描述数据的信息  )  对象
-		// 获取列数
-		int columnCount = rsmd.getColumnCount();
-		while(rs.next()) {
-			//   Map 无序键不重复  ==> LinkedHashMap   有序键不重复
-			Map<String,Object> row = new LinkedHashMap<>();
-			for(int i=0; i<columnCount ; i++) {
-				// 获取列名
-				String columnName = rsmd.getColumnName( i + 1);
-				// 获取列值
-				Object value = rs.getObject(i + 1);
-				row.put(columnName, value);
+		try {
+			// 3.创建语句
+			PreparedStatement ps = conn.prepareStatement(sql);
+			// 4.执行语句
+			// for + alt + /
+			// 设置参数
+			for (int i = 0; i < args.length; i++) {
+				ps.setObject(i+1, args[i]);
 			}
-			ret.add(row);
+			System.out.println("SQL: " + sql);
+			System.out.println("参数: " + Arrays.toString(args));
+			ResultSet rs = ps.executeQuery();
+			List<Map<String,Object>> ret = new ArrayList<>();
+			ResultSetMetaData rsmd = rs.getMetaData(); // 结果集   元数据(  描述数据的信息  )  对象
+			// 获取列数
+			int columnCount = rsmd.getColumnCount();
+			while(rs.next()) {
+				//   Map 无序键不重复  ==> LinkedHashMap   有序键不重复
+				Map<String,Object> row = new LinkedHashMap<>();
+				for(int i=0; i<columnCount ; i++) {
+					// 获取列名
+					String columnName = rsmd.getColumnName( i + 1);
+					// 获取列值
+					Object value = rs.getObject(i + 1);
+					row.put(columnName, value);
+				}
+				ret.add(row);
+			}
+			return ret;
+		} finally {
+			// 5.关闭连接
+			conn.close();
+			// 连接一定会被关闭
 		}
-		// 5.关闭连接
-		conn.close();
-		return ret;
 	}
 	
 	public static void main(String[] args) throws SQLException {
