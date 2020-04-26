@@ -101,6 +101,31 @@ public class DBHelper {
 		}
 	}
 	
+	/**
+	 * 	作业
+	 */
+	/**
+	 * 	用于查询一条记录
+	 * @param sql
+	 * @param args
+	 * @return
+	 * @throws SQLException
+	 */
+	public Map<String,Object> queryOne(String sql, Object...args) throws SQLException {
+		return null;
+	}
+	
+	/**
+	 * 	用于查询某个sql结果集的数量
+	 * @param sql
+	 * @param args
+	 * @return
+	 * @throws SQLException
+	 */
+	public int count(String sql, Object...args) throws SQLException {
+		return 0;
+	}
+	
 	public static void main(String[] args) throws SQLException {
 		DBHelper dbh = new DBHelper();
 		///String sql = "update dept set loc = ? where deptno = ?";
@@ -130,6 +155,9 @@ public class DBHelper {
 		for(Map<String,Object> row : list) {
 			System.out.println(row);
 		}
+		
+		
+		String sql = "select * from emp wher empno = ?";
 		
 	}
 
