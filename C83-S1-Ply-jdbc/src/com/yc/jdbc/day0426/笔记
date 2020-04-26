@@ -1,0 +1,36 @@
+JDBC入门
+java 数据库连接组件, 由一系列的接口和类构成
+JDBC = API(编程接口) + SPI(数据库驱动)
+
+JDBC 操作 五部曲 20字真言
+1. 加载驱动   => Class.forName("驱动程序类路径")
+2. 获取连接   => DriverManager.getConnection(url,name,pwd);
+3. 创建语句   => conn.createStatement()      // 普通语句
+			     conn.prepareStatement(sql)  // 预编译
+			     预编译的SQL语句,支持 ? 占位符  => 能够阻止 注入攻击
+		PreparedStatement 是 Statement 的子类
+4. 执行语句   => stat.executeQuery(sql);  //执行查询语句
+				 stat.executeUpdate(sql);  //执行任何修改数据库的语句(增删改,建表...)
+				 ps.setXXX(参数索引,  参数值) ==> 添加参数,  参数的索引从 1 开始计数
+				 ps.executeQuery()
+				 ps.executeUpdate()
+				 
+				 查询语句执行后将会返回 结果集对象   
+				 	ResultSet   next();
+				 				getXXX(字段的索引(从1开始)  获取 字段名)
+5. 关闭连接
+
+
+JDBC 封装 => DBHelper
+
+
+
+JDBC 高级
+
+
+
+
+
+
+
+				 

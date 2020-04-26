@@ -1,4 +1,4 @@
-package com.yc.jdbc;
+package com.yc.jdbc.day0425;
 
 import java.sql.*;
 
