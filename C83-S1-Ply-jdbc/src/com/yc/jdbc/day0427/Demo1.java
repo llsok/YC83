@@ -21,9 +21,6 @@ public class Demo1 {
 	 * 	ename='张三'					  ==> select * from emp where ename = '张三'
 	 *  ename='张三'  , sal = 2000		  ==> select * from emp where ename = '张三' and sal=2000
 	 * @throws SQLException 
-	 * 
-	 * 
-	 * 
 	 */
 	public List<Map<String, Object>> queryEmp(Emp emp) throws SQLException {
 
