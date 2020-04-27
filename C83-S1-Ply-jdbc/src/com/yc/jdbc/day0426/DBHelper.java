@@ -111,8 +111,16 @@ public class DBHelper {
 	 * @return
 	 * @throws SQLException
 	 */
-	public Map<String,Object> queryOne(String sql, Object...args) throws SQLException {
-		return null;
+	public Map<String,Object> queryOne(String sql, Object...args) 
+			throws SQLException {
+		List<Map<String,Object>> list = query(sql,args);
+		if(list.size()==0) {
+			return null;
+		} else if(list.size()==1) {
+			return list.get(0);
+		} else {
+			throw new SQLException("查询结果大于1");
+		}
 	}
 	
 	/**
@@ -122,8 +130,12 @@ public class DBHelper {
 	 * @return
 	 * @throws SQLException
 	 */
-	public int count(String sql, Object...args) throws SQLException {
-		return 0;
+	public int count(String sql, Object...args) 
+			throws SQLException {
+		sql = "select count(*) cnt from (" + sql + ")";
+		List<Map<String,Object>> list = query(sql,args);
+		Object number = list.get(0).get("CNT");  // BigDecimal 大实数
+		return Integer.valueOf(number.toString());
 	}
 	
 	public static void main(String[] args) throws SQLException {
@@ -156,9 +168,10 @@ public class DBHelper {
 			System.out.println(row);
 		}
 		
-		
-		String sql = "select * from emp wher empno = ?";
-		
+		System.out.println("============================");
+		System.out.println(dbh.queryOne("select * from dept where deptno=?", 60));
+		System.out.println("============================");
+		System.out.println(dbh.count("select * from emp where ename like ? ", "%S%"));
 	}
 
 }
