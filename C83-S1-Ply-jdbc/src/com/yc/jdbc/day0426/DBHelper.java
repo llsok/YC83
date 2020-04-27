@@ -1,5 +1,6 @@
 package com.yc.jdbc.day0426;
 
+import java.lang.reflect.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -136,6 +137,105 @@ public class DBHelper {
 		List<Map<String,Object>> list = query(sql,args);
 		Object number = list.get(0).get("CNT");  // BigDecimal 大实数
 		return Integer.valueOf(number.toString());
+	}
+	
+	/**
+	 * 	泛型方法
+	 * @param sql
+	 * @param cls 	实体类的类对象
+	 * @param args
+	 * @return
+	 * @throws SQLException
+	 */
+	public <E> List<E> query(String sql, Class<E> cls, Object...args) throws SQLException {
+		Connection conn = getConnection();
+		try {
+			// 3.创建语句
+			PreparedStatement ps = conn.prepareStatement(sql);
+			// 4.执行语句
+			// for + alt + /
+			// 设置参数
+			for (int i = 0; i < args.length; i++) {
+				ps.setObject(i+1, args[i]);
+			}
+			System.out.println("SQL: " + sql);
+			System.out.println("参数: " + Arrays.toString(args));
+			ResultSet rs = ps.executeQuery();
+			
+			List<E> ret = new ArrayList<>();
+			ResultSetMetaData rsmd = rs.getMetaData(); // 结果集   元数据(  描述数据的信息  )  对象
+			// 获取列数
+			int columnCount = rsmd.getColumnCount();
+			while(rs.next()) {
+				//   Map 无序键不重复  ==> LinkedHashMap   有序键不重复
+				E row = cls.newInstance();  // 通过反射创建实体对象
+				for(int i=0; i<columnCount ; i++) {
+					// 获取列名
+					String columnName = rsmd.getColumnName( i + 1);
+					// 获取列值
+					/**
+					 * 	重点:
+					 * 	1. 根据列名找到对应的属性 ==> Field   (反射)
+					 * 	2.根据属性的类型, 从结果集中获取对应类型属性值
+					 * 	3.将属性值设置到对象属性值
+					 */
+					Field field = null;
+					try {
+						// 约定: 属性名都是小写
+						field = cls.getDeclaredField(columnName.toLowerCase());
+					} catch (NoSuchFieldException e) {  // 属性没有找到的异常
+						System.out.println("忽略属性没有找到的错误: " + e.getMessage());
+						continue;
+					} 
+					Object columnValue;
+					// 使用 rs 与 属性类型 相对应的方法获取属性值
+					if( field.getType().equals(Integer.class)){
+						columnValue = rs.getInt(columnName);
+					} else if( field.getType().equals(Long.class)){
+						columnValue = rs.getLong(columnName);
+					} else if( field.getType().equals(Double.class)){
+						columnValue = rs.getDouble(columnName);
+					/**
+					 * 其他的基本数据类型, 请同学们自行添加
+					 */
+						
+					// 两个常用的日期类型
+					} else if( field.getType().equals(Date.class)){
+						columnValue = rs.getDate(columnName);
+					} else if( field.getType().equals(Timestamp.class)){
+						columnValue = rs.getTimestamp(columnName);
+						
+					// 其他类型不处理了, 直接设置到属性中
+					} else {
+						columnValue = rs.getObject(columnName);
+					}
+					field.setAccessible(true);  //  设置强制访问
+					field.set(row, columnValue); // 将属性值设置到 row 对象的当前 field 属性中
+				}
+				ret.add(row);
+			}
+			return ret;
+		} catch (SQLException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new SQLException(cls.getName() + "对象封装错误", e );
+		}  finally {
+			// 5.关闭连接
+			conn.close();
+			// 连接一定会被关闭
+		}
+	}
+
+	public <E> E queryOne(String sql, Class<E> cls, Object...args) 
+			throws SQLException {
+		List<E> list = query(sql,cls, args);
+		if(list.size()==0) {
+			return null;
+		} else if(list.size()==1) {
+			return list.get(0);
+		} else {
+			throw new SQLException("查询结果大于1");
+		}
 	}
 	
 	public static void main(String[] args) throws SQLException {
