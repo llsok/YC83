@@ -1,3 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebContent/0419/hello_jsp.java=UTF-8
+encoding//WebContent/0429/\u6570\u636E\u5E93\u811A\u672C.sql=UTF-8
 encoding//src/com/yc/web/servlet/day0419/SayHelloServlet.java=UTF-8
+encoding//src/com/yc/web/util/DbHelper.java=UTF-8
+encoding//src/com/yc/web/util/MyProperties.java=UTF-8

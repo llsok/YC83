@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="ajax.js"></script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+	<table border="1">
+		<tr>
+			<th>编号</th>
+			<th>书名</th>
+			<th>出版社</th>
+		</tr>
+		<tr v-for="book in bookList">
+			<td>{{book.bookid}}</td>
+			<td>{{book.bookname}}</td>
+			<td>{{book.bookpress}}</td>
+		</tr>
+	</table>
+</div>
+<script type="text/javascript">
+	var vue = new Vue( {
+		el : "#app",
+		data : {
+			bookList : []
+		},
+	} );
+	
+	get("/C83-S2-Ply-web/query.s", function(booksJson){	
+		var books = JSON.parse(booksJson); // json 字符串 转 js 对象
+		// $data
+		vue.$data.bookList = books;
+	});
+</script>
+
+</body>
+</html>

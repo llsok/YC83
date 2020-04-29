@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="ajax.js"></script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+</head>
+<body>
+<h1>图书信息编辑</h1>
+<div id="app">
+	图书名称:<input v-model="bookname"><br>
+	图书出版社:<input v-model="bookpress"><br>
+	出版时间:<input v-model="pressdate"><br>
+	作者:<input v-model="bookauthor"><br>
+	数量:<input v-model="bookcount"><br>
+	<button @click="save">保存</button>
+</div>
+	<script type="text/javascript">
+		new Vue({
+			el : "#app",
+			data : {
+				bookname : null,
+				bookpress : null,
+				pressdate : null,
+				bookauthor : null,
+				bookcount : null,
+			},
+			methods : {
+				save(){
+					var url = "/C83-S2-Ply-web/create.s?";
+					url += "bookname=" + this.bookname;
+					url += "&bookpress=" + this.bookpress;
+					url += "&pressdate=" + this.pressdate;
+					url += "&bookauthor=" + this.bookauthor;
+					url += "&bookcount=" + this.bookcount;
+					get(url,function(data){
+						if(data == 1){
+							alert("图书保存成功!");
+						} else {
+							alert("图书保存失败!");
+						}
+					});
+				}
+			}
+		});
+	</script>
+</body>
+</html>
