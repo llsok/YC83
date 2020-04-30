@@ -3,12 +3,22 @@ package com.yc.lib.ui;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
+
+import java.util.List;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Text;
+
+import com.yc.lib.bean.Book;
+import com.yc.lib.biz.BookBiz;
+
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class BookCmp extends Composite {
 	private Text text;
@@ -41,6 +51,12 @@ public class BookCmp extends Composite {
 		text_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Button button = new Button(this, SWT.NONE);
+		button.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				query();
+			}
+		});
 		GridData gd_button = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_button.widthHint = 62;
 		button.setLayoutData(gd_button);
@@ -93,12 +109,31 @@ public class BookCmp extends Composite {
 		
 		TableColumn tableColumn_2 = new TableColumn(table, SWT.NONE);
 		tableColumn_2.setWidth(100);
-		tableColumn_2.setText("作者");
+		tableColumn_2.setText("ISBN");
 		
 		TableColumn tableColumn_3 = new TableColumn(table, SWT.NONE);
 		tableColumn_3.setWidth(100);
 		tableColumn_3.setText("出版社");
-
+		query();
+	}
+	public void query() {
+		
+		// 去掉表格中原有记录
+		table.removeAll();
+		// 创建图书业务对象
+		BookBiz bb = new BookBiz();
+		List<Book> list = bb.query();
+		
+		// 将集合中的图书信息, 写入表格
+		for(Book book: list) {
+			TableItem tableItem = new TableItem(table, SWT.NONE);
+			tableItem.setText(new String[] {
+					book.getId().toString(),
+					book.getName(),
+					book.getIsbn(),
+					book.getPress()
+			});
+		}
 	}
 
 	@Override

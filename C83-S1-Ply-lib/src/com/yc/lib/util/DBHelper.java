@@ -195,6 +195,8 @@ public class DBHelper {
 						columnValue = rs.getLong(columnName);
 					} else if( field.getType().equals(Double.class)){
 						columnValue = rs.getDouble(columnName);
+					} else if( field.getType().equals(Byte.class)){
+						columnValue = rs.getByte(columnName);
 					/**
 					 * 其他的基本数据类型, 请同学们自行添加
 					 */
