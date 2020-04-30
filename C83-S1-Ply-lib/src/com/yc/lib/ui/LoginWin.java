@@ -103,7 +103,10 @@ public class LoginWin {
 				// if 判断转换成 try catch
 				try {
 					ubiz.login(name, pwd);
-					mb.setMessage("登录成功!");
+					// 关闭当前窗口
+					LoginWin.this.shell.close();
+					// 打开主窗口
+					new MainWin().open();
 				} catch (BizException e1) {
 					e1.printStackTrace();
 					mb.setMessage(e1.getMessage());
@@ -117,6 +120,13 @@ public class LoginWin {
 		btnNewButton.setText("登录");
 		
 		Button button = new Button(shell, SWT.NONE);
+		button.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// 关闭窗口
+				shell.close();
+			}
+		});
 		button.setText("取消");
 		button.setBounds(204, 150, 80, 27);
 
