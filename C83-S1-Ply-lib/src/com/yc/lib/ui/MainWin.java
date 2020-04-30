@@ -7,6 +7,11 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.layout.FillLayout;
 
 public class MainWin {
 
@@ -47,6 +52,10 @@ public class MainWin {
 		shell = new Shell();
 		shell.setSize(450, 300);
 		shell.setText("SWT Application");
+		shell.setLayout(new FillLayout(SWT.HORIZONTAL));
+		
+		TabFolder tabFolder = new TabFolder(shell, SWT.NONE);
+
 		
 		Menu menu = new Menu(shell, SWT.BAR);
 		shell.setMenuBar(menu);
@@ -58,9 +67,32 @@ public class MainWin {
 		menuItem.setMenu(menu_1);
 		
 		MenuItem menuItem_1 = new MenuItem(menu_1, SWT.NONE);
+		menuItem_1.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
+				tabItem.setText("图书管理");
+				// 创建员工查询控件
+				BookCmp bc = new BookCmp(tabFolder, SWT.NONE);
+				// 添加到标签页中
+				tabItem.setControl(bc);
+				
+			}
+		});
 		menuItem_1.setText("图书管理");
 		
 		MenuItem menuItem_2 = new MenuItem(menu_1, SWT.NONE);
+		menuItem_2.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TabItem tabItem_1 = new TabItem(tabFolder, SWT.NONE);
+				tabItem_1.setText("图书管理");
+				
+				Button btnTddd = new Button(tabFolder, SWT.NONE);
+				tabItem_1.setControl(btnTddd);
+				btnTddd.setText("tddd");
+			}
+		});
 		menuItem_2.setText("员工管理");
 		
 		MenuItem menuItem_3 = new MenuItem(menu, SWT.CASCADE);
