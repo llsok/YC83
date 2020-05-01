@@ -50,10 +50,13 @@ public class MainWin {
 	 */
 	protected void createContents() {
 		shell = new Shell();
-		shell.setSize(450, 300);
-		shell.setText("SWT Application");
+		shell.setSize(688, 517);
+		shell.setText("图书管理系统");
 		shell.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
+		shell.setLocation((Display.getCurrent().getClientArea().width - shell.getSize().x) / 2,
+				(Display.getCurrent().getClientArea().height - shell.getSize().y) / 2);
+
 		TabFolder tabFolder = new TabFolder(shell, SWT.NONE);
 
 		

@@ -43,6 +43,8 @@ public class DBHelper {
 	 * @throws SQLException
 	 */
 	public int update(String sql, Object...args) throws SQLException {
+		System.out.println("SQL: " + sql);
+		System.out.println("参数: " + Arrays.toString(args));
 		Connection conn = getConnection();
 		try {
 			// 3.创建语句
@@ -53,8 +55,6 @@ public class DBHelper {
 			for (int i = 0; i < args.length; i++) {
 				ps.setObject(i+1, args[i]);
 			}
-			System.out.println("SQL: " + sql);
-			System.out.println("参数: " + Arrays.toString(args));
 			int rows = ps.executeUpdate();
 			return rows;
 		} finally {

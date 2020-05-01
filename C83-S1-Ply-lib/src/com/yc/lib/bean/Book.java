@@ -8,6 +8,7 @@ public class Book implements java.io.Serializable{
 	
 	private Integer id;
 	private String name;
+	private String author;
 	private String press;
 	private String isbn;
 	private Date pressdate;
@@ -56,7 +57,12 @@ public class Book implements java.io.Serializable{
 	public void setStatus(Byte status) {
 		this.status = status;
 	}
-
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

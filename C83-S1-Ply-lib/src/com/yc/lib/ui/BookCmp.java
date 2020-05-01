@@ -63,6 +63,16 @@ public class BookCmp extends Composite {
 		button.setText("查 询");
 		
 		Button button_1 = new Button(this, SWT.NONE);
+		button_1.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// 打开图书编辑窗口
+				boolean ret = new BookWin(getShell(),SWT.NONE).open();
+				if(ret) {
+					query();
+				}
+			}
+		});
 		GridData gd_button_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_button_1.widthHint = 62;
 		button_1.setLayoutData(gd_button_1);
