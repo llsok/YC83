@@ -111,5 +111,13 @@ public class BookBiz {
 			return new ArrayList<Book>();
 		}
 	}
+	
+	public Book queryOne(Integer id) throws BizException {
+		try {
+			return new DBHelper().queryOne("select * from book where id=?", Book.class, id);
+		} catch (SQLException e) {
+			throw new BizException("系统错误,请联系管理员!", e);
+		}
+	}
 
 }

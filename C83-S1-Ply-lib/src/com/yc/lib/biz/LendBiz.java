@@ -42,8 +42,6 @@ public class LendBiz {
 			conn = dbh.getConnection();
 			String sql = "insert into lend values (seq_lib.nextval,?,?,sysdate,null,?)";
 			dbh.update(sql, lend.getBookid(),lend.getClient(),lend.getEmpid());
-			// 模拟异常
-			int i = 1/0;
 			sql = "update book set status=1 where id=?";
 			dbh.update(sql, lend.getBookid());
 			// 提交事务
