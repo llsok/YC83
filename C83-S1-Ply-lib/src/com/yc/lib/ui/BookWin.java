@@ -156,14 +156,14 @@ public class BookWin extends Dialog {
 		lblNewLabel_5.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		lblNewLabel_5.setText("入库时间:");
 		
-		text_createtime = new Text(shell, SWT.BORDER);
+		text_createtime = new Text(shell, SWT.BORDER | SWT.READ_ONLY);
 		text_createtime.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		lblNewLabel_6 = new Label(shell, SWT.NONE);
 		lblNewLabel_6.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		lblNewLabel_6.setText("状态:");
 		
-		text_status = new Text(shell, SWT.BORDER);
+		text_status = new Text(shell, SWT.BORDER | SWT.READ_ONLY);
 		text_status.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		composite = new Composite(shell, SWT.NONE);

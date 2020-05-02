@@ -43,14 +43,25 @@ public class BookBiz {
 			if(cnt > 0) {
 				throw new BizException("该图书已经录入系统了");
 			}
-			
-			sql = "insert into book values(seq_lib.nextval,?,?,?,?,?,sysdate,0)";
-			dbh.update(sql, 
-					book.getName(),
-					book.getAuthor(),
-					book.getPress(),
-					book.getIsbn(),
-					book.getPressdate());
+
+			if(book.getId()==null || book.getId()==0) {
+				sql = "insert into book values(seq_lib.nextval,?,?,?,?,?,sysdate,0)";
+				dbh.update(sql, 
+						book.getName(),
+						book.getAuthor(),
+						book.getPress(),
+						book.getIsbn(),
+						book.getPressdate());
+			} else {
+				sql = "update book set name=?,author=?,press=?,isbn=?,pressdate=? where id=?";
+				dbh.update(sql, 
+						book.getName(),
+						book.getAuthor(),
+						book.getPress(),
+						book.getIsbn(),
+						book.getPressdate(),
+						book.getId());
+			}
 		} catch (SQLException e) {
 			// 异常转型
 			throw new BizException("系统错误,请联系管理员!", e);
