@@ -9,6 +9,24 @@ import java.util.List;
 import java.util.Map;
 
 public class DBHelper {
+	
+	/**
+	 * 事务控制, true 表示进行事务管理,   false 不管理
+	 */
+	private boolean isTransaction;
+	
+	/**
+	 * 事务控制, 使用的唯一的连接
+	 */
+	private Connection conn;
+	
+	public DBHelper() {
+		this(false);
+	}
+	
+	public DBHelper(boolean isTransaction) {
+		this.isTransaction = isTransaction;
+	}
 
 	/**
 	 * 	加载驱动
@@ -25,6 +43,16 @@ public class DBHelper {
 	}
 
 	/**
+	 * 关闭连接
+	 * @throws SQLException
+	 */
+	public void closeConnection() throws SQLException {
+		if(conn != null) {
+			conn.close();
+			conn = null;
+		}
+	}
+	/**
 	 * 	获取连接
 	 * @return
 	 * @throws SQLException
@@ -33,7 +61,19 @@ public class DBHelper {
 		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 		String user = "lib";
 		String password = "a";
-		return DriverManager.getConnection(url, user, password);
+		
+		// 判断是否进行事务管理
+		if(isTransaction) {
+			// 判断唯一的连接对象是否为null(已经被创建)
+			if(conn == null) {
+				conn = DriverManager.getConnection(url, user, password);
+				// 自动提交参数( 自动提交会在每次执行完sql语句之后, 自动的提交数据), 默认为 true
+				conn.setAutoCommit(false);
+			}
+			return conn;
+		} else {
+			return DriverManager.getConnection(url, user, password);
+		}
 	}
 
 	/**
@@ -58,9 +98,12 @@ public class DBHelper {
 			int rows = ps.executeUpdate();
 			return rows;
 		} finally {
-			// 5.关闭连接
-			conn.close();
-			// 连接一定会被关闭
+			// 如果没有进行事务控制, 则关闭连接
+			if(isTransaction == false ) {
+				// 5.关闭连接
+				conn.close();
+				// 连接一定会被关闭
+			}
 		}
 	}
 	
@@ -96,9 +139,12 @@ public class DBHelper {
 			}
 			return ret;
 		} finally {
-			// 5.关闭连接
-			conn.close();
-			// 连接一定会被关闭
+			// 如果没有进行事务控制, 则关闭连接
+			if(isTransaction == false ) {
+				// 5.关闭连接
+				conn.close();
+				// 连接一定会被关闭
+			}
 		}
 	}
 	
@@ -222,9 +268,12 @@ public class DBHelper {
 		} catch (Exception e) {
 			throw new SQLException(cls.getName() + "对象封装错误", e );
 		}  finally {
-			// 5.关闭连接
-			conn.close();
-			// 连接一定会被关闭
+			// 如果没有进行事务控制, 则关闭连接
+			if(isTransaction == false ) {
+				// 5.关闭连接
+				conn.close();
+				// 连接一定会被关闭
+			}
 		}
 	}
 
