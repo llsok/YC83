@@ -57,6 +57,15 @@ public class BookBiz {
 		}
 	}
 	
-	
+	public void delete(Integer id) throws BizException {
+		DBHelper dbh = new DBHelper();
+		String sql = "delete book where id=?";
+		try {
+			dbh.update(sql, id);
+		} catch (SQLException e) {
+			// 异常转型
+			throw new BizException("系统错误,请联系管理员!", e);
+		}
+	}
 
 }

@@ -10,7 +10,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Text;
 
 import com.yc.lib.bean.Book;
+import com.yc.lib.biz.BizException;
 import com.yc.lib.biz.BookBiz;
+import com.yc.lib.util.DataHelper;
+import com.yc.lib.util.SwtHelper;
 
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
@@ -99,6 +102,33 @@ public class BookCmp extends Composite {
 		button_2.setText("修 改");
 		
 		Button button_3 = new Button(this, SWT.NONE);
+		button_3.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if(table.getSelectionCount()==0) {
+					SwtHelper.msg(getShell(), "请选择要删除的记录");
+					return;
+				}
+				// 获取选中的所有行
+				TableItem[] rows = table.getSelection();
+				// 获取选中的第一行
+				TableItem row = rows[0];
+				
+				// 提示图书是否删除
+				if(SwtHelper.confirm(getShell(), "请确认是否要删除该图书")) {
+					Integer id = DataHelper.asInteger(row.getText(0), 0);
+					try {
+						// 执行删除
+						new BookBiz().delete(id);
+						//刷新表格
+						query();
+					} catch (BizException e1) {
+						e1.printStackTrace();
+						SwtHelper.msg(getShell(), e1.getMessage());
+					}
+				}
+			}
+		});
 		GridData gd_button_3 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_button_3.widthHint = 62;
 		button_3.setLayoutData(gd_button_3);
