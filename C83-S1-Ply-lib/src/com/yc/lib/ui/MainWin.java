@@ -73,13 +73,22 @@ public class MainWin {
 		menuItem_1.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				/**
+				 * 判断标签页中有没有打开图书管理, 如果有直接切换过去
+				 */
+				for( TabItem ti : tabFolder.getItems()) {
+					if(ti.getText().equals("图书管理")) {
+						// 切换到该页
+						tabFolder.setSelection(ti);
+						return;
+					}
+				}
 				TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 				tabItem.setText("图书管理");
 				// 创建员工查询控件
 				BookCmp bc = new BookCmp(tabFolder, SWT.NONE);
 				// 添加到标签页中
 				tabItem.setControl(bc);
-				
 			}
 		});
 		menuItem_1.setText("图书管理");
@@ -89,7 +98,7 @@ public class MainWin {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				TabItem tabItem_1 = new TabItem(tabFolder, SWT.NONE);
-				tabItem_1.setText("图书管理");
+				tabItem_1.setText("员工管理");
 				
 				Button btnTddd = new Button(tabFolder, SWT.NONE);
 				tabItem_1.setControl(btnTddd);
