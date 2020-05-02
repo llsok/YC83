@@ -96,6 +96,31 @@ public class BookCmp extends Composite {
 		text_isbn.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Button button_2 = new Button(this, SWT.NONE);
+		button_2.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if(table.getSelectionCount()==0) {
+					SwtHelper.msg(getShell(), "请选择要删除的记录");
+					return;
+				}
+				// 获取选中的所有行
+				TableItem[] rows = table.getSelection();
+				// 获取选中的第一行
+				TableItem row = rows[0];
+				
+				Book book = (Book) row.getData();
+				
+				BookWin bookwin = new BookWin(getShell(),SWT.NONE);
+				// 设置要修改的图书
+				bookwin.setBook(book);
+				
+				boolean ret = bookwin.open();
+				if(ret) {
+					query();
+				}
+				
+			}
+		});
 		GridData gd_button_2 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_button_2.widthHint = 62;
 		button_2.setLayoutData(gd_button_2);
@@ -183,6 +208,8 @@ public class BookCmp extends Composite {
 					book.getIsbn(),
 					book.getPress()
 			});
+			// 表格行对象添加一个用户自定义的数据
+			tableItem.setData(book);
 		}
 	}
 

@@ -57,5 +57,9 @@ public class DataHelper {
 		}
 		return false;
 	}
+	
+	public static String asString(Object value) {
+		return value != null ? value.toString() : "";
+	}
 
 }

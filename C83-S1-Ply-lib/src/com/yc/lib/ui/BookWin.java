@@ -51,6 +51,15 @@ public class BookWin extends Dialog {
 	private Text text_pressdate;
 	private Text text_createtime;
 	private Text text_status;
+	
+	private Book book;
+	/**
+	 * 属性方法    对象方法   实例方法
+	 * @param book
+	 */
+	public void setBook(Book book) {
+		this.book = book;
+	}
 
 	/**
 	 * Create the dialog.
@@ -105,7 +114,7 @@ public class BookWin extends Dialog {
 		lblNewLabel.setLayoutData(gd_lblNewLabel);
 		lblNewLabel.setText("图书ID:");
 		
-		text_id = new Text(shell, SWT.BORDER);
+		text_id = new Text(shell, SWT.BORDER | SWT.READ_ONLY);
 		text_id.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		lblNewLabel_1 = new Label(shell, SWT.NONE);
@@ -199,6 +208,17 @@ public class BookWin extends Dialog {
 		});
 		button_1.setBounds(148, 10, 80, 27);
 		button_1.setText("保 存");
+		
+		if(book != null ) {
+			text_id.setText(DataHelper.asString(book.getId()));
+			text_name.setText(DataHelper.asString(book.getName()));
+			text_press.setText(DataHelper.asString(book.getPress()));
+			text_isbn.setText(DataHelper.asString(book.getIsbn()));
+			text_author.setText(DataHelper.asString(book.getAuthor()));
+			text_pressdate.setText(DataHelper.asString(book.getPressdate()));
+			text_createtime.setText(DataHelper.asString(book.getCreatetime()));
+			text_status.setText(DataHelper.asString(book.getStatus()));
+		}
 
 	}
 }
