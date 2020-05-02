@@ -24,10 +24,10 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
 public class BookCmp extends Composite {
-	private Text text;
-	private Text text_1;
-	private Text text_2;
-	private Text text_3;
+	private Text text_name;
+	private Text text_author;
+	private Text text_press;
+	private Text text_isbn;
 	private Table table;
 
 	/**
@@ -43,15 +43,15 @@ public class BookCmp extends Composite {
 		label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		label.setText("书名");
 		
-		text = new Text(this, SWT.BORDER);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		text_name = new Text(this, SWT.BORDER);
+		text_name.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label label_1 = new Label(this, SWT.NONE);
 		label_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		label_1.setText("作者");
 		
-		text_1 = new Text(this, SWT.BORDER);
-		text_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		text_author = new Text(this, SWT.BORDER);
+		text_author.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Button button = new Button(this, SWT.NONE);
 		button.addSelectionListener(new SelectionAdapter() {
@@ -85,15 +85,15 @@ public class BookCmp extends Composite {
 		label_2.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		label_2.setText("出版社");
 		
-		text_2 = new Text(this, SWT.BORDER);
-		text_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		text_press = new Text(this, SWT.BORDER);
+		text_press.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label lblIsbn = new Label(this, SWT.NONE);
 		lblIsbn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblIsbn.setText("ISBN");
 		
-		text_3 = new Text(this, SWT.BORDER);
-		text_3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		text_isbn = new Text(this, SWT.BORDER);
+		text_isbn.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Button button_2 = new Button(this, SWT.NONE);
 		GridData gd_button_2 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
@@ -147,6 +147,10 @@ public class BookCmp extends Composite {
 		tableColumn_1.setWidth(100);
 		tableColumn_1.setText("书名");
 		
+		TableColumn tableColumn_4 = new TableColumn(table, SWT.NONE);
+		tableColumn_4.setWidth(100);
+		tableColumn_4.setText("作者");
+		
 		TableColumn tableColumn_2 = new TableColumn(table, SWT.NONE);
 		tableColumn_2.setWidth(100);
 		tableColumn_2.setText("ISBN");
@@ -157,12 +161,17 @@ public class BookCmp extends Composite {
 		query();
 	}
 	public void query() {
+		Book b = new Book();
+		b.setName(text_name.getText());
+		b.setAuthor(text_author.getText());
+		b.setPress(text_press.getText());
+		b.setIsbn(text_isbn.getText());
 		
 		// 去掉表格中原有记录
 		table.removeAll();
 		// 创建图书业务对象
 		BookBiz bb = new BookBiz();
-		List<Book> list = bb.query();
+		List<Book> list = bb.query(b);
 		
 		// 将集合中的图书信息, 写入表格
 		for(Book book: list) {
@@ -170,6 +179,7 @@ public class BookCmp extends Composite {
 			tableItem.setText(new String[] {
 					book.getId().toString(),
 					book.getName(),
+					book.getAuthor(),
 					book.getIsbn(),
 					book.getPress()
 			});

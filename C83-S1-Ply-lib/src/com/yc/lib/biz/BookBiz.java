@@ -67,5 +67,38 @@ public class BookBiz {
 			throw new BizException("系统错误,请联系管理员!", e);
 		}
 	}
+	
+	/**
+	 * 组合条件查询
+	 * @param book
+	 * @return
+	 */
+	public List<Book> query(Book book){
+		String sql = "select * from book where 1=1 ";
+		List<Object> params = new ArrayList<>();
+		if(DataHelper.isEmpty(book.getName()) == false ) {
+			sql += "and name like ?";
+			params.add("%" + book.getName() + "%");
+		}
+		if(DataHelper.isEmpty(book.getAuthor()) == false ) {
+			sql += "and author like ?";
+			params.add("%" + book.getAuthor() + "%");
+		}
+		if(DataHelper.isEmpty(book.getIsbn()) == false ) {
+			sql += "and isbn like ?";
+			params.add("%" + book.getIsbn() + "%");
+		}
+		if(DataHelper.isEmpty(book.getPress()) == false ) {
+			sql += "and press like ?";
+			params.add("%" + book.getPress() + "%");
+		}
+		
+		try {
+			return new DBHelper().query(sql, Book.class, params.toArray());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ArrayList<Book>();
+		}
+	}
 
 }
