@@ -2,9 +2,13 @@ package com.yc.lib.biz;
 
 import java.sql.SQLException;
 
+import com.yc.lib.bean.Emp;
 import com.yc.lib.util.DBHelper;
 
 public class UserBiz {
+	
+	// 成功登陆的用户( 经办人 )
+	public static Emp loginedEmp;
 	
 	public void login(String user, String pwd) throws BizException{
 		
@@ -20,8 +24,8 @@ public class UserBiz {
 		}
 		DBHelper dbh = new DBHelper();
 		try {
-			int cnt = dbh.count("select * from emp where name=? and pwd=?", user, pwd);
-			if(cnt == 1) {
+			loginedEmp = dbh.queryOne("select * from emp where name=? and pwd=?",Emp.class, user, pwd);
+			if(loginedEmp != null) {
 				return;
 			} else {
 				throw new BizException("用户名或密码错误!");

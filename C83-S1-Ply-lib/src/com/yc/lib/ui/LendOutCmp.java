@@ -13,6 +13,7 @@ import com.yc.lib.bean.Lend;
 import com.yc.lib.biz.BizException;
 import com.yc.lib.biz.BookBiz;
 import com.yc.lib.biz.LendBiz;
+import com.yc.lib.biz.UserBiz;
 import com.yc.lib.util.DataHelper;
 import com.yc.lib.util.SwtHelper;
 
@@ -88,7 +89,7 @@ public class LendOutCmp extends Composite {
 				/**
 				 * 注意: 经办人临时使用 id = 1 的用户id
 				 */
-				lend.setEmpid(1);
+				lend.setEmpid(UserBiz.loginedEmp.getId());
 				try {
 					lb.lend(lend);
 					SwtHelper.msg(getShell(), "借书成功!");
