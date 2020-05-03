@@ -26,6 +26,9 @@ public class LendRetCmp extends Composite {
 	private Text text_2;
 	private Text text_3;
 	private Text text_4;
+	
+	// 借阅记录对象
+	private Lend lend;
 
 	/**
 	 * Create the composite.
@@ -63,7 +66,13 @@ public class LendRetCmp extends Composite {
 					
 					// 查询借阅记录
 					LendBiz lb = new LendBiz();
-					Lend lend = lb.queryByBookId(DataHelper.asInteger(text.getText(),0));
+					lend = lb.queryByBookId(DataHelper.asInteger(text.getText(),0));
+					if(lend == null) {
+						SwtHelper.msg(getShell(), "该图书未借出");
+						text_3.setText("");
+						text_4.setText("");
+						return;
+					}
 					text_3.setText(lend.getClient());
 					text_4.setText(lend.getOuttime().toString());
 					
@@ -85,29 +94,18 @@ public class LendRetCmp extends Composite {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				
-				if("0".equals(text_2.getText())== false) {
-					SwtHelper.msg(getShell(), "该图书已经被借出!");
+				if("1".equals(text_2.getText())== false) {
+					SwtHelper.msg(getShell(), "该图书已经被归还!");
 					return;
 				}
 				LendBiz lb = new LendBiz();
-				Lend lend = new Lend();
-				lend.setBookid(DataHelper.asInteger(text.getText(),0));
-				lend.setClient(text_3.getText());
-				/**
-				 * 注意: 经办人临时使用 id = 1 的用户id
-				 */
-				lend.setEmpid(1);
 				try {
-					lb.lend(lend);
-					SwtHelper.msg(getShell(), "借书成功!");
+					lb.ret(lend);
+					SwtHelper.msg(getShell(), "还书成功!");
 				} catch (BizException e1) {
 					e1.printStackTrace();
 					SwtHelper.msg(getShell(), e1.getMessage());
 				}
-				
-				
-				
 			}
 		});
 		button.setText("归 还");
