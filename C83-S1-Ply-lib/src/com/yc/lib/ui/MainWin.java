@@ -135,6 +135,24 @@ public class MainWin {
 		menuItem_4.setText("借出图书");
 		
 		MenuItem menuItem_5 = new MenuItem(menu_2, SWT.NONE);
+		menuItem_5.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				for( TabItem ti : tabFolder.getItems()) {
+					if(ti.getText().equals("归还图书")) {
+						// 切换到该页
+						tabFolder.setSelection(ti);
+						return;
+					}
+				}
+				TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
+				tabItem.setText("归还图书");
+				// 创建员工查询控件
+				LendRetCmp loc = new LendRetCmp(tabFolder, SWT.NONE);
+				// 添加到标签页中
+				tabItem.setControl(loc);
+			}
+		});
 		menuItem_5.setText("归还图书");
 		
 		MenuItem menuItem_6 = new MenuItem(menu, SWT.CASCADE);

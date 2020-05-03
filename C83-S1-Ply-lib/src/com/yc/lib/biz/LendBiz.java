@@ -64,4 +64,20 @@ public class LendBiz {
 		
 	}
 
+	/**
+	 * 根据图书id查借阅记录
+	 * @param asInteger
+	 * @return
+	 * @throws BizException 
+	 */
+	public Lend queryByBookId(Integer bookid) throws BizException {
+		DBHelper dbh = new DBHelper();
+		String sql = "select * from lend where bookid=? and rettime is null";
+		try {
+			return dbh.queryOne(sql, Lend.class, bookid);
+		} catch (SQLException e) {
+			throw new BizException("检索借书记录失败!",e);
+		}
+	}
+
 }
